@@ -1,27 +1,35 @@
-import React from "react";
+"use client";
 
-function SearchEngine({ query, setQuery, search }) {
-  const handleKeyPress = (e) => {
+import { useWeather } from "@/app/contexts/WeatherContext";
+
+export default function SearchEngine() {
+  const { query, setQuery, search } = useWeather();
+
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       search(e);
     }
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    search(e);
+  };
+
   return (
-    <div className="SearchEngine h-full flex item-center justify-center">
+    <form onSubmit={handleSubmit} className="search-engine flex">
       <input
         type="text"
-        className="city-search w-full"
-        placeholder="city"
-        name="query"
+        placeholder="Search for a city..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyPress}
+        onKeyDown={handleKeyDown}
+        className="flex-grow p-2 border rounded-l"
       />
-      <button onClick={search} className="border w-40 border-black rounded-3xl">
-        search
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded-r">
+        Search
       </button>
-    </div>
+    </form>
   );
 }
-
-export default SearchEngine;
