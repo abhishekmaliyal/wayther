@@ -1,10 +1,14 @@
 @import "tailwindcss";
 
-
-div{
-    border: 1px solid black;
+div {
+  border: 1px solid black;
 }
 
+.title {
+  font-family: var(--font-transcity);
+  font-style: normal;
+  font-weight: normal;
+}
 
 :root {
   --background: #ffffff;
