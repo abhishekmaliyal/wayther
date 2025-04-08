@@ -7,7 +7,7 @@ const WeatherContext = createContext();
 
 export const WeatherProvider = ({ children }) => {
   const [query, setQuery] = useState("");
-  const [weather, setWeather] = useState({
+  const [weatherData, setWeather] = useState({
     loading: true,
     data: null,
     error: false,
@@ -19,7 +19,7 @@ export const WeatherProvider = ({ children }) => {
     const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 
     try {
-      setWeather({ ...weather, loading: true });
+      setWeather({ ...weatherData, loading: true });
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
       );
@@ -124,7 +124,7 @@ export const WeatherProvider = ({ children }) => {
       value={{
         query,
         setQuery,
-        weather,
+        weatherData,
         forecastData,
         isCelsius,
         search,

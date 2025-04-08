@@ -10,6 +10,10 @@ div {
   font-weight: normal;
 }
 
+input::placeholder {
+  color:#0a0a0a;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #161616;
