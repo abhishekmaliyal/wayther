@@ -65,6 +65,7 @@ export const WeatherProvider = ({ children }) => {
           condition: {
             icon_url: `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`,
             description: day.weather[0].description,
+
           },
           temperature: {
             minimum: day.main.temp_min,

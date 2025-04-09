@@ -20,6 +20,7 @@ export default function ForecastData() {
                   className="day-icon"
                   src={day.condition.icon_url}
                   alt={day.condition.description}
+                  priority
                 />
               )}
               <p className="day-temperature">

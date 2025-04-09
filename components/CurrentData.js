@@ -23,6 +23,7 @@ export default function CurrentData() {
               src={data.condition.icon_url}
               alt={data.condition.description}
               className="temp-icon"
+              priority
             />
           )}
           {convertTemperature(data.temperature.current)}
