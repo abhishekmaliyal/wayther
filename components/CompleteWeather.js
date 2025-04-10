@@ -1,29 +1,17 @@
 "use client";
 
-import { useWeather } from "@/app/contexts/WeatherContext";
 import CurrentData from "./CurrentData";
 import ForecastData from "./ForecastData";
 
 function CompleteWeather() {
-  const { weatherData } = useWeather();
-
-  const { data, error } = weatherData;
-
-  if (error) {
-    return <span className="error-message">Sorry city not found, please try again.</span>;
-  }
-
-  if (!data) return null;
-
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
-      <div className="city-name">
-        <h2>
-          {data.city}, <span>{data.country}</span>
-        </h2>
+    <div className="flex items-center justify-center w-full h-full">
+      <div className="current flex w-2/3 px-20 py-10 h-full">
+        <CurrentData />
       </div>
-      <CurrentData />
-      <ForecastData />
+      <div className="forecast flex w-1/3 p-8 h-full">
+        <ForecastData />
+      </div>
     </div>
   );
 }

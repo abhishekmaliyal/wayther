@@ -5,6 +5,8 @@ import axios from "axios";
 
 const WeatherContext = createContext();
 
+const DEFAULT_CITY = "dehradun";
+
 export const WeatherProvider = ({ children }) => {
   const [query, setQuery] = useState("");
   const [weatherData, setWeather] = useState({
@@ -15,11 +17,11 @@ export const WeatherProvider = ({ children }) => {
   const [forecastData, setForecastData] = useState([]);
   const [isCelsius, setIsCelsius] = useState(true);
 
-  const fetchWeatherData = async (city = localStorage.getItem("city")) => {
+  const fetchWeatherData = async (city = localStorage.getItem("city") || DEFAULT_CITY) => {
     const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 
     try {
-      setWeather({ ...weatherData, loading: true });
+      setWeather({ ...weatherData, loading: true, error: false });
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
       );
@@ -30,6 +32,7 @@ export const WeatherProvider = ({ children }) => {
         condition: {
           description: response.data.weather[0].description,
           icon_url: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+          icon: response.data.weather[0].icon,
         },
         temperature: {
           current: response.data.main.temp,
@@ -42,11 +45,95 @@ export const WeatherProvider = ({ children }) => {
 
       setWeather({ data: transformedData, loading: false, error: false });
       fetchForecastData(response.data.name);
+
+      localStorage.setItem("city", city);
     } catch (error) {
-      setWeather({ data: null, loading: false, error: true });
       console.error("Weather fetch error:", error);
+
+      const previousCity = localStorage.getItem("city");
+
+      if (previousCity && previousCity !== city) {
+        setWeather({ ...weatherData, loading: true, error: true });
+
+        fetchPreviousCity(previousCity);
+      } else {
+        if (city !== DEFAULT_CITY) {
+          fetchDefaultCity();
+        } else {
+          setWeather({ ...weatherData, loading: false, error: true });
+        }
+      }
     }
-    localStorage.setItem("city", city);
+  };
+
+  const fetchPreviousCity = async (previousCity) => {
+    const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${previousCity}&appid=${apiKey}&units=metric`
+      );
+
+      const transformedData = {
+        city: response.data.name,
+        country: response.data.sys.country,
+        condition: {
+          description: response.data.weather[0].description,
+          icon_url: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+          icon: response.data.weather[0].icon,
+        },
+        temperature: {
+          current: response.data.main.temp,
+          humidity: response.data.main.humidity,
+        },
+        wind: {
+          speed: response.data.wind.speed,
+        },
+      };
+
+      setWeather({ data: transformedData, loading: false, error: true });
+      fetchForecastData(response.data.name);
+    } catch (error) {
+      console.error("Failed to fetch previous city:", error);
+      fetchDefaultCity();
+    }
+  };
+
+  const fetchDefaultCity = async () => {
+    const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+
+    try {
+      setWeather({ ...weatherData, loading: true, error: true });
+
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${DEFAULT_CITY}&appid=${apiKey}&units=metric`
+      );
+
+      const transformedData = {
+        city: response.data.name,
+        country: response.data.sys.country,
+        condition: {
+          description: response.data.weather[0].description,
+          icon_url: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+          icon: response.data.weather[0].icon,
+        },
+        temperature: {
+          current: response.data.main.temp,
+          humidity: response.data.main.humidity,
+        },
+        wind: {
+          speed: response.data.wind.speed,
+        },
+      };
+
+      setWeather({ data: transformedData, loading: false, error: true });
+      fetchForecastData(response.data.name);
+
+      localStorage.setItem("city", DEFAULT_CITY);
+    } catch (error) {
+      console.error("Failed to fetch default city:", error);
+      setWeather({ data: null, loading: false, error: true });
+    }
   };
 
   const fetchForecastData = async (city) => {
@@ -65,7 +152,7 @@ export const WeatherProvider = ({ children }) => {
           condition: {
             icon_url: `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`,
             description: day.weather[0].description,
-
+            icon: day.weather[0].icon,
           },
           temperature: {
             minimum: day.main.temp_min,
@@ -95,6 +182,7 @@ export const WeatherProvider = ({ children }) => {
     }
 
     await fetchWeatherData(query);
+    setQuery("");
   };
 
   const toggleTemperatureUnit = () => {
@@ -114,10 +202,10 @@ export const WeatherProvider = ({ children }) => {
     const savedCity = localStorage.getItem("city");
 
     if (!savedCity) {
-      localStorage.setItem("city", "uganda");
+      localStorage.setItem("city", DEFAULT_CITY);
     }
 
-    fetchWeatherData();
+    fetchWeatherData(savedCity || DEFAULT_CITY);
   }, []);
 
   return (
@@ -138,5 +226,4 @@ export const WeatherProvider = ({ children }) => {
     </WeatherContext.Provider>
   );
 };
-
 export const useWeather = () => useContext(WeatherContext);

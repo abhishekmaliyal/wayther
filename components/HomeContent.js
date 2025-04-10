@@ -1,44 +1,42 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import SearchEngine from "./SearchEngine";
 import CompleteWeather from "./CompleteWeather";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
+import { useWeather } from "@/app/contexts/WeatherContext";
+import Topbar from "./Topbar";
 
 export default function HomeContent() {
-  const [open, setOpen] = useState(false);
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      setOpen(false);
-    }
-  };
+  const { weatherData } = useWeather();
+  const { data, error, loading } = weatherData;
 
   return (
     <>
       <div className="contain w-screen h-screen flex flex-col text-black bg-white">
-        <div className="top flex w-full h-[10%]">
-          <div className="title w-2/3 h-full flex items-center p-10 text-5xl">wayther.</div>
-          <div className="searchbar w-1/3 h-full flex p-4">
-            <Dialog open={open} onOpenChange={setOpen}>
-              <DialogTrigger className="border">change city</DialogTrigger>
-              <DialogContent onKeyDown={handleKeyDown}>
-                <DialogHeader>
-                  <DialogTitle>search for your city :</DialogTitle>
-                </DialogHeader>
-                <SearchEngine />
-              </DialogContent>
-            </Dialog>
+        <Topbar/>
+        <div className="cityinfo h-20 w-full flex justify-around items-center">
+          <div className="name">
+            <div className="city-name">
+              <h2>
+                {data?.city}, <span>{data?.country}</span>
+              </h2>
+            </div>
           </div>
+          <SearchEngine />
+          {error && (
+            <span className="error-message text-red-500 block mt-2">
+              City not found, showing {data?.city || "Dehradun"} instead
+            </span>
+          )}
+          <div className="day">monday</div>
+          <div className="date">1 apr</div>
         </div>
-        <div className="w-full h-[90%]">
-          <CompleteWeather />
+        <div className="w-full h-full">
+          {loading ? (
+            <div className="flex justify-center items-center h-full">Loading...</div>
+          ) : (
+            <CompleteWeather />
+          )}
         </div>
       </div>
     </>
