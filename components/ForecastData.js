@@ -8,23 +8,31 @@ export default function ForecastData() {
   return (
     <>
       <div className="forecast w-full">
-        <h3>5-Day Forecast:</h3>
+        <h3 className="text-3xl">5-Day Forecast:</h3>
         <div className="forecast-container flex flex-col items-center justify-center w-full">
           {forecastData.map((day) => (
-            <div className="day" key={day.time}>
-              <p className="day-name">{formatDay(day.time)}</p>
-              <div className="perday flex pb-4">
-                {day.condition.icon_url && (
-                  <WeatherIcons
-                    icon={day.condition.icon}
-                    description={day.condition.description}
-                    className="w-[100px] h-[100px]"
-                  />
-                )}
-                <p className="day-temperature">
-                  {convertTemperature(day.temperature.minimum)}°/
-                  <span>{convertTemperature(day.temperature.maximum)}°</span>
-                </p>
+            <div className="day w-full" key={day.time}>
+              <p className="day-name text-xl">{formatDay(day.time)}</p>
+              <div className="perday flex pb-2">
+                <div className="dayicon">
+                  {day.condition.icon_url && (
+                    <WeatherIcons
+                      icon={day.condition.icon}
+                      description={day.condition.description}
+                      width={130}
+                      height={130}
+                    />
+                  )}
+                </div>
+                <div className="minmax w-full">
+                  <p className="day-temperature text-xl">
+                    minimum : {convertTemperature(day.temperature.minimum)}°
+                  </p>
+                  <p className="day-temperature text-xl">
+                    {" "}
+                    maximum : {convertTemperature(day.temperature.maximum)}°
+                  </p>
+                </div>
               </div>
             </div>
           ))}

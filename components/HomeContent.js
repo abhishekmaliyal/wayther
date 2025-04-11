@@ -14,18 +14,18 @@ export default function HomeContent() {
     <>
       <div className="contain w-screen h-screen flex flex-col text-black bg-white">
         <Topbar/>
-        <div className="cityinfo h-20 w-full flex justify-around items-center">
-          <div className="name">
-            <div className="city-name">
+        <div className="cityinfo h-20 w-full flex justify-around items-center text-3xl">
+          <div className="name flex">
+            <div className="city-name px-4">
               <h2>
                 {data?.city}, <span>{data?.country}</span>
               </h2>
             </div>
-          </div>
           <SearchEngine />
+          </div>
           {error && (
             <span className="error-message text-red-500 block mt-2">
-              City not found, showing {data?.city || "Dehradun"} instead
+              City not found
             </span>
           )}
           <div className="day">monday</div>

@@ -7,21 +7,21 @@ export default function TempDisplay() {
     const { data } = weatherData;
   return (
     <>
-      <div className="tempanddesc flex flex-col w-[70%] items-center">
-        <div className="temp flex flex-col w-full h-full items-center justify-center">
-          <div className="values flex text-[20rem] z-10 absolute items-start">
-            {convertTemperature(data.temperature.current)}
-            <div className="temp-deg text-2xl" onClick={toggleTemperatureUnit}>
+      <div className="tempanddesc relative flex flex-col w-[70%] items-center h-full">
+        <div className="temp flex flex-col w-full h-[70%] items-center justify-center">
+          <div className="values flex lg:text-[15rem] text-[10rem] z-10 absolute items-start">
+            {convertTemperature(data.temperature.current)+"°"}
+            {/* <div className="temp-deg text-2xl" onClick={toggleTemperatureUnit}>
               {isCelsius ? "°C" : "°F"} | {isCelsius ? "°F" : "°C"}
-            </div>
+            </div> */}
           </div>
-          <div className="image w-full h-full">
+          <div className="image w-full h-full relative flex items-center justify-center ">
             {data.condition.icon && (
-              <WeatherIcons icon={data.condition.icon} description={data.condition.description} />
+              <WeatherIcons icon={data.condition.icon} description={data.condition.description} width={800} height={800}/>
             )}
           </div>
         </div>
-        <p className="weather-des">{data.condition.description}</p>
+        <p className="weather-des w-full h-[30%] flex justify-center text-3xl">{data.condition.description}</p>
       </div>
     </>
   );
