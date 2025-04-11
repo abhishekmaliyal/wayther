@@ -2,10 +2,15 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-/* 
-div {
+
+/* div {
   border: 1px solid black;
 } */
+
+*{
+  font-family: var(--font-faith);
+  font-style: normal;
+}
 
 .title {
   font-family: var(--font-transcity);
