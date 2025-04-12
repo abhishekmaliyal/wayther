@@ -2,16 +2,16 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
 
-const transcity = localFont({
-  src: "../public/fonts/Transcity.otf",
+const inter = localFont({
+  src: "../public/fonts/Inter.ttf",
   display: "swap",
-  variable: "--font-transcity",
+  variable: "--font-inter",
 });
 
-const faith = localFont({
-  src: "../public/fonts/Faith.otf",
+const gothic = localFont({
+  src: "../public/fonts/Gothic.ttf",
   display: "swap",
-  variable: "--font-faith",
+  variable: "--font-gothic",
 });
 
 const geistSans = Geist({
@@ -31,8 +31,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${transcity.variable} ${faith.variable}`}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+    <html lang="en" className={` ${inter.variable} ${gothic.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}>{children}</body>
     </html>
   );
 }

@@ -3,38 +3,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* div {
-  border: 1px solid black;
-} */
-
-*{
-  font-family: var(--font-faith);
-  font-style: normal;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
-
-.title {
-  font-family: var(--font-transcity);
-  font-style: normal;
-  font-weight: normal;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @theme inline {
   --color-background: var(--background);
@@ -145,11 +121,18 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+/* div {
+  border: 1px solid black;
+} */
+
+* {
+  font-family: var(--font-inter);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.title {
+  font-family: var(--font-gothic);
+  font-style: normal;
+  font-weight: 400;
 }
