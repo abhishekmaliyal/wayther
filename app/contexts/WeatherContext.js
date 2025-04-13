@@ -41,6 +41,8 @@ export const WeatherProvider = ({ children }) => {
         wind: {
           speed: response.data.wind.speed,
         },
+        dt: response.data.dt,
+        timezone: response.data.timezone,
       };
 
       setWeather({ data: transformedData, loading: false, error: false });
@@ -89,6 +91,8 @@ export const WeatherProvider = ({ children }) => {
         wind: {
           speed: response.data.wind.speed,
         },
+        dt: response.data.dt,
+        timezone: response.data.timezone,
       };
 
       setWeather({ data: transformedData, loading: false, error: true });
@@ -124,6 +128,8 @@ export const WeatherProvider = ({ children }) => {
         wind: {
           speed: response.data.wind.speed,
         },
+        dt: response.data.dt,
+        timezone: response.data.timezone,
       };
 
       setWeather({ data: transformedData, loading: false, error: true });
@@ -195,7 +201,7 @@ export const WeatherProvider = ({ children }) => {
 
   const formatDay = (timestamp) => {
     const date = new Date(timestamp * 1000);
-    return date.toLocaleDateString("en-US", { weekday: "short" });
+    return date.toLocaleDateString("en-US", { weekday: "long" });
   };
 
   useEffect(() => {
