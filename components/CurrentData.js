@@ -10,18 +10,18 @@ export default function CurrentData() {
       <div className="relative contain flex w-full h-full">
         <TempDisplay />
         <div className="weather-info flex w-[30%] flex-col text-xl justify-center">
-          <div className="col w-full h-auto flex">
+          <div className="col w-full h-auto flex border-b-2">
             <Image width={200} height={200} src={`/icons/wind.svg`} alt="wind" />
             <div className="flex flex-col justify-center w-full">
               <p className="wind">{data.wind.speed} m/s</p>
-              <p>Wind Speed</p>
+              <p className="heading">Wind Speed</p>
             </div>
           </div>
-          <div className="col w-full h-auto flex">
+          <div className="col w-full h-auto flex border-b-2">
             <Image width={200} height={200} src={`/icons/humidity.svg`} alt="wind" />
             <div className="flex flex-col justify-center w-full">
               <p className="humidity">{data.temperature.humidity}%</p>
-              <p>Humidity</p>
+              <p className="heading">Humidity</p>
             </div>
           </div>
         </div>

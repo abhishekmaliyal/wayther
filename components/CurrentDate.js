@@ -9,7 +9,7 @@ export default function CurrentDate({ dt, timezone }) {
     const localTime = new Date((dt + timezone) * 1000);
     const formattedDate = localTime.toLocaleDateString("en-US", {
       day: "numeric",
-      month: "short",
+      month: "long",
     });
     setDate(formattedDate);
   }, [dt, timezone]);

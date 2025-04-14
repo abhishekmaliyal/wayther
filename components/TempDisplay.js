@@ -17,11 +17,11 @@ export default function TempDisplay() {
           </div>
           <div className="image w-full h-full relative flex items-center justify-center ">
             {data.condition.icon && (
-              <WeatherIcons icon={data.condition.icon} description={data.condition.description} width={800} height={800}/>
+              <WeatherIcons icon={data.condition.icon} description={data.condition.description} width={800} height={800} className=""/>
             )}
           </div>
         </div>
-        <p className="weather-des w-full h-[30%] flex justify-center text-3xl">{data.condition.description}</p>
+        <p className="weather-des w-full h-[30%] flex justify-center text-3xl heading underline underline-offset-8 capitalize ">&quot;{data.condition.description}&quot;</p>
       </div>
     </>
   );

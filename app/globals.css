@@ -125,10 +125,17 @@
   border: 1px solid black;
 } */
 
-* {
+.heading {
+  font-family: var(--font-inter);
+  font-weight: bolder;
+}
+
+span,
+p,
+h2 {
   font-family: var(--font-inter);
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
 }
 
 .title {

@@ -8,12 +8,12 @@ export default function ForecastData() {
   return (
     <>
       <div className="forecast w-full">
-        <h3 className="text-3xl">5-Day Forecast:</h3>
+        <h3 className="text-3xl pb-4 font-semibold heading">5-Day Forecast:</h3>
         <div className="forecast-container flex flex-col items-center justify-center w-full">
           {forecastData.map((day) => (
-            <div className="day w-full" key={day.time}>
-              <p className="day-name text-xl">{formatDay(day.time)}</p>
-              <div className="perday flex pb-2">
+            <div className="day w-full border-b-2" key={day.time}>
+              <p className="day-name text-xl heading">{formatDay(day.time)}</p>
+              <div className="perday flex">
                 <div className="dayicon">
                   {day.condition.icon_url && (
                     <WeatherIcons
