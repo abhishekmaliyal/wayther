@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const inter = localFont({
   src: "../public/fonts/Inter.ttf",
@@ -31,8 +32,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={` ${inter.variable} ${gothic.variable}`}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}>{children}</body>
+    <html lang="en" className={` ${inter.variable} ${gothic.variable}`} suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange={true}
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

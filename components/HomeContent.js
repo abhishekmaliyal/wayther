@@ -5,8 +5,9 @@ import CompleteWeather from "./CompleteWeather";
 
 import { useWeather } from "@/app/contexts/WeatherContext";
 import Topbar from "./Topbar";
-import CurrentDate from "./CurrentDate";
 import CurrentDay from "./CurrentDay";
+import { ModeToggle } from "./theme/darkmode";
+import CircularText from "./ui/CircularText";
 
 export default function HomeContent() {
   const { weatherData } = useWeather();
@@ -14,13 +15,13 @@ export default function HomeContent() {
 
   return (
     <>
-      <div className="contain w-screen h-screen flex flex-col text-black bg-white">
+      <div className="contain w-screen h-screen flex flex-col">
         <Topbar />
         <div className="cityinfo h-20 w-full flex justify-between items-center text-3xl border-b-2 p-8 ">
           <div className="name flex items-center justify-center">
             <div className="city-name">
-              <h2>
-                {data?.city}, <span>{data?.country}</span>
+              <h2 className="heading px-4">
+                {data?.city}, <span className="heading">{data?.country}</span>
               </h2>
             </div>
             <SearchEngine />
@@ -29,9 +30,6 @@ export default function HomeContent() {
           <div className="dayanddate flex items-center gap-8 px-8">
             <div className="day">
               <CurrentDay dt={data?.dt} timezone={data?.timezone} />
-            </div>
-            <div className="date">
-              <CurrentDate dt={data?.dt} timezone={data?.timezone} />
             </div>
           </div>
         </div>
@@ -42,6 +40,7 @@ export default function HomeContent() {
             <CompleteWeather />
           )}
         </div>
+          <ModeToggle />
       </div>
     </>
   );

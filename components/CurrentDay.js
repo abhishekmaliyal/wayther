@@ -7,9 +7,15 @@ export default function CurrentDay({ dt, timezone }) {
 
   useEffect(() => {
     const localTime = new Date((dt + timezone) * 1000);
-    const weekday = localTime.toLocaleDateString("en-US", { weekday: "long" });
-    setDay(weekday);
+    const fullDateTime = localTime.toLocaleDateString("en-US", {
+      timeZone: "UTC",
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    setDay(fullDateTime);
   }, [dt, timezone]);
 
-  return <span>{day}</span>;
+  return <span className="heading">{day}</span>;
 }

@@ -9,7 +9,7 @@ export default function CurrentData() {
     <>
       <div className="relative contain flex w-full h-full">
         <TempDisplay />
-        <div className="weather-info flex w-[30%] flex-col text-xl justify-center">
+        <div className="weather-info flex w-[30%] flex-col text-xl justify-center h-3/4">
           <div className="col w-full h-auto flex border-b-2">
             <Image width={200} height={200} src={`/icons/wind.svg`} alt="wind" />
             <div className="flex flex-col justify-center w-full">

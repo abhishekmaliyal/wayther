@@ -33,7 +33,7 @@ export default function SearchEngine() {
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger className="z-20">
+        <DialogTrigger className="z-20 cursor-pointer">
           <FiEdit3 />
         </DialogTrigger>
         <DialogContent onKeyDown={handleKeyDown}>
