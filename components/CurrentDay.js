@@ -10,7 +10,6 @@ export default function CurrentDay({ dt, timezone }) {
     const fullDateTime = localTime.toLocaleDateString("en-US", {
       timeZone: "UTC",
       weekday: "long",
-      year: "numeric",
       month: "long",
       day: "numeric",
     });

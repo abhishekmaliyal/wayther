@@ -5,11 +5,11 @@ import ForecastData from "./ForecastData";
 
 function CompleteWeather() {
   return (
-    <div className="flex justify-center w-full h-full">
-      <div className="current flex w-2/3 px-20 py-10 h-full">
+    <div className="flex flex-col lg:flex-row w-full">
+      <div className="w-full lg:w-2/3 px-4 sm:px-8 lg:px-16 py-6 lg:py-10 mb-10">
         <CurrentData />
       </div>
-      <div className="forecast flex w-1/3 px-20 py-10">
+      <div className="w-full lg:w-1/3 px-4 sm:px-8 lg:px-16 py-6 lg:py-10">
         <ForecastData />
       </div>
     </div>

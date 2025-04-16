@@ -7,7 +7,6 @@ import { useWeather } from "@/app/contexts/WeatherContext";
 import Topbar from "./Topbar";
 import CurrentDay from "./CurrentDay";
 import { ModeToggle } from "./theme/darkmode";
-import CircularText from "./ui/CircularText";
 
 export default function HomeContent() {
   const { weatherData } = useWeather();
@@ -17,7 +16,7 @@ export default function HomeContent() {
     <>
       <div className="contain w-screen h-screen flex flex-col">
         <Topbar />
-        <div className="cityinfo h-20 w-full flex justify-between items-center text-3xl border-b-2 p-8 ">
+        <div className="cityinfo h-20 w-full flex justify-between items-center text-xl md:text-2xl lg:text-3xl border-b-2 p-4 lg:p-8 md:p-6">
           <div className="name flex items-center justify-center">
             <div className="city-name">
               <h2 className="heading px-4">
@@ -27,7 +26,7 @@ export default function HomeContent() {
             <SearchEngine />
           </div>
           {error && <span className="error-message text-red-500 block mt-2">City not found</span>}
-          <div className="dayanddate flex items-center gap-8 px-8">
+          <div className="dayanddate flex items-center gap-8 px-4">
             <div className="day">
               <CurrentDay dt={data?.dt} timezone={data?.timezone} />
             </div>
@@ -40,7 +39,7 @@ export default function HomeContent() {
             <CompleteWeather />
           )}
         </div>
-          <ModeToggle />
+        <ModeToggle />
       </div>
     </>
   );

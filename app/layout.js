@@ -33,7 +33,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={` ${inter.variable} ${gothic.variable}`} suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased lg:overflow-hidden overflow-x-hidden`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

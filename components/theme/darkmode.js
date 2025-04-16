@@ -26,22 +26,19 @@ export function ModeToggle() {
   };
 
   return (
-    <div className="right flex items-end right w-[10%] absolute bottom-4 right-4">
-      <div className="darkmode h-[20%] w-full flex items-center justify-center">
-        <button
-          aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-          className="darkmode select-none transform rotate-90 cursor-crosshair text-sm font-medium transition-colors hover:text-primary/80"
-          onClick={toggleTheme}
-        >
-          {/* {isDarkMode ? "light mode." : "dark mode."} */}
-          <CircularText
+    <div className="fixed bottom-6 right-6 z-50 overflow-clip">
+      <button
+        aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+        className="select-none cursor-pointer"
+        onClick={toggleTheme}
+      >
+        <CircularText
           text={isDarkMode ? "lightmode*lightmode*" : "darkmode*darkmode*"}
           onHover="speedUp"
           spinDuration={20}
-          className="custom-class"
+          className="w-12 h-12 sm:w-12 sm:h-12"
         />
-        </button>
-      </div>
+      </button>
     </div>
   );
 }
